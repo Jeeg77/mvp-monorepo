@@ -1,8 +1,23 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Node
 node_modules/
+
+# Next.js
 .next/
+out/
+
+# Build
 dist/
 build/
+
+# Logs
+*.log
+
+# Environment
 .env
 .env.local
+
+# OS
+.DS_Store
+Thumbs.db
