@@ -1,0 +1,1 @@
+export default function Page(){return <main><h1>MVP App</h1></main>}

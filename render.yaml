@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: mvp-backend
+    env: node
+    rootDir: backend
+  - type: web
+    name: mvp-frontend
+    env: node
+    rootDir: frontend
