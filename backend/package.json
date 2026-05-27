@@ -1,6 +1,16 @@
 {
   "name":"backend",
   "type":"module",
-  "scripts":{"dev":"node src/server.js"},
-  "dependencies":{"express":"latest","cors":"latest","dotenv":"latest","@supabase/supabase-js":"latest","resend":"latest","jsonwebtoken":"latest"}
+  "scripts": {
+    "dev":"node src/server.js", 
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express":"latest", 
+    "cors":"latest", 
+    "dotenv":"latest", 
+    "@supabase/supabase-js":"latest", 
+    "resend":"latest",
+    "jsonwebtoken":"latest"
+  }
 }
