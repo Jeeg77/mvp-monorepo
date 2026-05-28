@@ -2,8 +2,8 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "node src/server.js",
-    "start": "node src/server.js"
+    "dev": "node -r dotenv/config src/server.js",
+    "start": "node -r dotenv/config src/server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "latest",

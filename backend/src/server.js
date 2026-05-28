@@ -1,17 +1,20 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
+
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from 'swagger-jsdoc';
 
 import authRoutes from './routes/auth.routes.js';
 import emailRoutes from './routes/email.routes.js';
 
-dotenv.config();
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 
 const specs = swaggerJsdoc({
   definition: {
@@ -28,10 +31,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
-});
-
-app.post('/api/email/send', (req, res) => {
-  res.json({ message: 'Email endpoint ready' });
 });
 
 app.use('/api/auth', authRoutes);
