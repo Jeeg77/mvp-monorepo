@@ -33,6 +33,13 @@ app.get('/api/health', (req, res) => {
   res.json({ ok: true });
 });
 
+app.get('/api/debug-env', (req, res) => {
+  res.json({
+    supabaseUrl: process.env.SUPABASE_URL,
+    hasServiceRole: !!process.env.SUPABASE_SERVICE_ROLE_KEY
+  });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/email', emailRoutes);
 
