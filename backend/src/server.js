@@ -30,7 +30,10 @@ const specs = swaggerJsdoc({
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.get('/api/health', (req, res) => {
-  res.json({ ok: true });
+  res.json({
+    ok: true,
+    version: "NEW_BUILD"
+  });
 });
 
 app.get('/api/debug-env', (req, res) => {
