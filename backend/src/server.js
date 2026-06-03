@@ -12,7 +12,14 @@ import emailRoutes from './routes/email.routes.js';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://mvp-monorepo-frontend-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com"
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 
