@@ -10,8 +10,6 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import authRoutes from './routes/auth.routes.js';
 import emailRoutes from './routes/email.routes.js';
 
-import dns from 'node:dns/promises';
-
 const app = express();
 
 app.use(cors({
@@ -55,30 +53,6 @@ app.get('/api/debug-env', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/email', emailRoutes);
 
-(async () => {
-  try {
-    console.log(
-      'GOOGLE:',
-      await dns.lookup('google.com')
-    );
-
-    console.log(
-      'SUPABASE:',
-      await dns.lookup('dsrhmnndazbmfadrfeut.supabase.co')
-    );
-  } catch (err) {
-    console.error('DNS ERROR:', err);
-  }
-})();
-
-(async () => {
-  try {
-    const response = await fetch('https://google.com');
-    console.log('GOOGLE STATUS:', response.status);
-  } catch (err) {
-    console.error('GOOGLE FETCH ERROR:', err);
-  }
-})();
 
 const PORT = process.env.PORT || 4000;
 
