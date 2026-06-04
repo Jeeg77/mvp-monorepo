@@ -88,10 +88,13 @@ router.post('/login', async (req, res) => {
         email,
         password
       });
+    
+    console.log("SUPABASE LOGIN ERROR:", error);
 
     if (error) {
       return res.status(401).json({
-        error: error.message
+        error: error.message,
+        details: error
       });
     }
 
@@ -102,8 +105,10 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
+    console.error(err);
     return res.status(500).json({
-      error: err.message
+      error: err.message,
+      stack: err.stack
     });
   }
 });
