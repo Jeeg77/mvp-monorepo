@@ -8,6 +8,7 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 console.log("SUPABASE_URL:", process.env.SUPABASE_URL);
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default supabase;

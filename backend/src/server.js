@@ -53,6 +53,27 @@ app.get('/api/debug-env', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/email', emailRoutes);
 
+import dns from 'node:dns/promises';
+
+(async () => {
+  console.log('=== DNS TEST START ===');
+
+  try {
+    const google = await dns.lookup('google.com');
+    console.log('GOOGLE DNS:', google);
+  } catch (err) {
+    console.error('GOOGLE DNS ERROR:', err);
+  }
+
+  try {
+    const supabase = await dns.lookup('dsrhmnndazbmfadrfeut.supabase.co');
+    console.log('SUPABASE DNS:', supabase);
+  } catch (err) {
+    console.error('SUPABASE DNS ERROR:', err);
+  }
+
+  console.log('=== DNS TEST END ===');
+})();
 
 const PORT = process.env.PORT || 4000;
 
