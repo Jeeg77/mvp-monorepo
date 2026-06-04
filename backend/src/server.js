@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import dns from 'node:dns/promises';
+
 import express from 'express';
 import cors from 'cors';
 
@@ -9,6 +11,43 @@ import swaggerJsdoc from 'swagger-jsdoc';
 
 import authRoutes from './routes/auth.routes.js';
 import emailRoutes from './routes/email.routes.js';
+
+(async () => {
+  console.log('=== STARTUP DIAGNOSTICS ===');
+
+  console.log(
+    'SUPABASE_URL_RAW:',
+    JSON.stringify(process.env.SUPABASE_URL)
+  );
+
+  console.log(
+    'SUPABASE_SERVICE_ROLE_KEY_PRESENT:',
+    !!process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+
+  try {
+    const google = await dns.lookup('google.com');
+    console.log('GOOGLE DNS:', google);
+  } catch (err) {
+    console.error('GOOGLE DNS ERROR:', err);
+  }
+
+  try {
+    const supabase = await dns.lookup('dsrhmnndazbmfadrfeut.supabase.co');
+    console.log('SUPABASE DNS:', supabase);
+  } catch (err) {
+    console.error('SUPABASE DNS ERROR:', err);
+  }
+
+  try {
+    const response = await fetch('https://google.com');
+    console.log('GOOGLE FETCH STATUS:', response.status);
+  } catch (err) {
+    console.error('GOOGLE FETCH ERROR:', err);
+  }
+
+  console.log('=== END STARTUP DIAGNOSTICS ===');
+})();
 
 const app = express();
 
@@ -21,7 +60,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
 
 const specs = swaggerJsdoc({
   definition: {
@@ -53,33 +91,8 @@ app.get('/api/debug-env', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/email', emailRoutes);
 
-import dns from 'node:dns/promises';
-
-(async () => {
-  console.log('=== DNS TEST START ===');
-
-  try {
-    const google = await dns.lookup('google.com');
-    console.log('GOOGLE DNS:', google);
-  } catch (err) {
-    console.error('GOOGLE DNS ERROR:', err);
-  }
-
-  try {
-    const supabase = await dns.lookup('dsrhmnndazbmfadrfeut.supabase.co');
-    console.log('SUPABASE DNS:', supabase);
-  } catch (err) {
-    console.error('SUPABASE DNS ERROR:', err);
-  }
-
-  console.log('=== DNS TEST END ===');
-})();
-
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`API running on ${PORT}`);
 });
-
-
-
