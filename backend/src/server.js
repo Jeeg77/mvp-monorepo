@@ -51,13 +51,15 @@ import emailRoutes from './routes/email.routes.js';
 
 const app = express();
 
+const allowedOrigins = (
+  process.env.CORS_ORIGINS || "http://localhost:3000"
+).split(",");
+
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://mvp-monorepo-frontend-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com"
-  ],
+  origin: allowedOrigins,
   credentials: true
 }));
+
 
 app.use(express.json());
 
@@ -91,7 +93,7 @@ app.get('/api/debug-env', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/email', emailRoutes);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`API running on ${PORT}`);
