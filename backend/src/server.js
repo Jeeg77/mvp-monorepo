@@ -13,7 +13,7 @@ import emailRoutes from './routes/email.routes.js';
 
 const app = express();
 
-// CORS configuration
+// CORS
 const allowedOrigins = (
   process.env.CORS_ORIGINS || 'http://localhost:3000'
 )
@@ -37,12 +37,10 @@ const specs = swaggerJsdoc({
       version: '1.0.0'
     }
   },
-  apis: ['./routes/*.js'] // Verificare il percorso effettivo
+  apis: ['./src/routes/*.js']
 });
 
-if (process.env.ENABLE_SWAGGER === 'true') {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-}
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Health check
 app.get('/api/health', (req, res) => {
