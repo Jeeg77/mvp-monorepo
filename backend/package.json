@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "node -r dotenv/config src/server.js",
-    "start": "node -r dotenv/config src/server.js"
+    "start": "node -r dotenv/config src/server.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@supabase/supabase-js": "latest",
@@ -14,5 +15,8 @@
     "resend": "latest",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.15.0"
   }
 }

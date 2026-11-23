@@ -1,4 +1,5 @@
 import express from 'express';
+import { sendWelcomeEmail } from '../services/email.service.js';
 
 const router = express.Router();
 
